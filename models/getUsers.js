@@ -24,7 +24,19 @@ export async function createUser(body) {
 //create function to get users by id
 export async function getUserByID(id) {
 	try {
-		const data = await query(`SELECT * FROM users WHERE userID = $1;`, [id])
+		const data = await query(`SELECT * FROM users WHERE user_id = $1;`, [id])
+		return data.rows
+	} catch (error) {
+		console.log(error.message)
+	}
+}
+//create function to get users by name
+export async function getUserByName(name) {
+	try {
+		const data = await query(
+			`SELECT * FROM users WHERE name ILIKE '%' || $1 || '%'`,
+			[name]
+		)
 		return data.rows
 	} catch (error) {
 		console.log(error.message)
