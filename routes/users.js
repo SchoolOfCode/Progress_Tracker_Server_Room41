@@ -8,8 +8,14 @@ const router = express.Router()
 
 //GET all users
 router.get('/', async function (req, res, next) {
-	const data = await queries.getAllUsers()
-	res.json({success: true, payload: data})
+	const {name} = req.query
+	if (name) {
+		const data = await queries.getUserByName(name)
+		res.json({success: true, payload: data})
+	} else {
+		const data = await queries.getAllUsers()
+		res.json({success: true, payload: data})
+	}
 })
 //GET users by ID
 router.get('/:id', async function (req, res, next) {
@@ -17,6 +23,7 @@ router.get('/:id', async function (req, res, next) {
 	const data = await queries.getUserByID(id)
 	res.json({success: true, payload: data})
 })
+
 //POST create user
 router.post('/', async function (req, res, next) {
 	const {name} = req.body
