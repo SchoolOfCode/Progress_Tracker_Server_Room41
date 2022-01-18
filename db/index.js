@@ -8,8 +8,8 @@ const pool = new pg.Pool({
 	port: dbConfig.port,
 	ssl: {rejectUnauthorized: false},
 })
-export default function query(text, params) {
-	const res = pool.query(text, params)
+export default async function query(text, params) {
+	const res = await pool.query(text, params)
 	console.log('This is the query: ', res)
 	return res
 }
