@@ -9,9 +9,3 @@ export default async function query(text, params) {
 	console.log('This is the query: ', res)
 	return res
 }
-
-// user: dbConfig.user,
-// host: dbConfig.host,
-// database: dbConfig.database,
-// password: dbConfig.password,
-// port: dbConfig.port,

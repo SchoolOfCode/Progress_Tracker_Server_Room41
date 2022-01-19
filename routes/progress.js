@@ -7,15 +7,6 @@ import * as queries from '../models/getStats.js'
 const router = express.Router()
 //create routes for the api
 
-//GET stats by week, day or all stats
-// const {week, day} = req.query
-// 	if (week) {
-// 		const data = await queries.getStatsByWeek()
-// 		res.json({success: true, payload: data})
-// 	} else if (day) {
-// 		const data = await queries.getStatsByDay()
-// 		res.json({success: true, payload: data})
-// 	} else {
 router.get('/', async function (req, res, next) {
 	const data = await queries.getAllStats()
 	res.json({success: true, payload: data})
@@ -23,8 +14,8 @@ router.get('/', async function (req, res, next) {
 
 //POST create stats
 router.post('/', async function (req, res, next) {
-	const {week, day, score} = req.body
-	let createdStats = await queries.createStats(week, day, score)
+	const {week, day, score, link_id} = req.body
+	let createdStats = await queries.createStats(week, day, score, link_id)
 	console.log('createdStats: ', createdStats)
 	res.json({success: true, payload: createdStats})
 })

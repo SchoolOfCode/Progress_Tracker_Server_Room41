@@ -30,7 +30,7 @@ export async function getStatsByDay() {
 export async function createStats(week, day, score, link_id) {
 	try {
 		const data = await query(
-			'INSERT INTO progress (week, day, score,link_id) VALUES($1, $2, $3, $4);',
+			'INSERT INTO progress (week, day, score, link_id) VALUES($1, $2, $3, $4) RETURNING *;',
 			[week, day, score, link_id]
 		)
 		console.log('data.rows: ', data.rows)
