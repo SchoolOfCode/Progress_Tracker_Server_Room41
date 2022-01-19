@@ -7,8 +7,10 @@ import progresssRouter from './routes/progress.js'
 import usersRouter from './routes/users.js'
 
 const app = express()
-
-app.use(cors({origin: 'https://vigilant-rosalind-f37987.netlify.app'}))
+// {
+// 	origin: 'https://vigilant-rosalind-f37987.netlify.app'
+// }
+app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))

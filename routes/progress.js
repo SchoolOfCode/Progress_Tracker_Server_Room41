@@ -1,4 +1,5 @@
 //import express
+import cors from 'cors'
 import express from 'express'
 //import the functions from models.getUsers.js
 import * as queries from '../models/getStats.js'
@@ -15,13 +16,13 @@ const router = express.Router()
 // 		const data = await queries.getStatsByDay()
 // 		res.json({success: true, payload: data})
 // 	} else {
-router.get('/', async function (req, res, next) {
+router.get('/', cors(), async function (req, res, next) {
 	const data = await queries.getAllStats()
 	res.json({success: true, payload: data})
 })
 
 //POST create stats
-router.post('/', async function (req, res, next) {
+router.post('/', cors(), async function (req, res, next) {
 	const {week, day, score} = req.body
 	let createdStats = await queries.createStats(week, day, score)
 	console.log('createdStats: ', createdStats)
