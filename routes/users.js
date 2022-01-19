@@ -6,7 +6,7 @@ import * as queries from '../models/getUsers.js'
 const router = express.Router()
 //create routes for the api
 
-//GET all users
+//GET user by name or all users
 router.get('/', async function (req, res, next) {
 	const {name} = req.query
 	if (name) {
@@ -26,8 +26,8 @@ router.get('/:id', async function (req, res, next) {
 
 //POST create user
 router.post('/', async function (req, res, next) {
-	const {name} = req.body
-	let createdUser = await queries.createUser(name)
+	const {name, password} = req.body
+	let createdUser = await queries.createUser(name, password)
 	console.log('createdUser: ', createdUser)
 	res.json({success: true, payload: createdUser})
 })

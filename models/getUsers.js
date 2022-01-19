@@ -11,9 +11,12 @@ export async function getAllUsers() {
 	}
 }
 //create function to create user
-export async function createUser(body) {
+export async function createUser(name, pass) {
 	try {
-		const data = await query('INSERT INTO users (name) VALUES($1);', [body])
+		const data = await query(
+			'INSERT INTO users (name, password) VALUES($1, $2) RETURNING *;',
+			[name, pass]
+		)
 		console.log('data.rows: ', data.rows)
 		return data.rows
 	} catch (error) {
