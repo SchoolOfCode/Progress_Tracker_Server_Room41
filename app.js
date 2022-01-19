@@ -8,7 +8,7 @@ import usersRouter from './routes/users.js'
 
 const app = express()
 
-app.use(cors('https://vigilant-rosalind-f37987.netlify.app'))
+app.use(cors({origin: 'https://vigilant-rosalind-f37987.netlify.app'}))
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
