@@ -4,7 +4,9 @@ import query from '../db/index.js'
 
 export async function getAllStats() {
 	try {
-		const data = await query(`SELECT * FROM progress;`)
+		const data = await query(
+			`SELECT * FROM progress JOIN users ON users.uid = progress.link_id;`
+		)
 		return data.rows
 	} catch (error) {
 		console.log(error.message)
