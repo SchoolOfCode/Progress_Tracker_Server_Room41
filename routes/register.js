@@ -8,10 +8,11 @@ const router = express.Router()
 
 //GET user by name or all users
 router.get('/', async function (req, res, next) {
-	const {name} = req.query
-	if (name) {
-		const data = await queries.getUserByName(name)
+	const {name, password} = req.query
+	if (name && password) {
+		const data = await queries.getSignUpUser(name, password)
 		res.json({success: true, payload: data})
+		return
 	} else {
 		const data = await queries.getAllUsers()
 		res.json({success: true, payload: data})
@@ -28,8 +29,11 @@ router.get('/:id', async function (req, res, next) {
 router.post('/', async function (req, res, next) {
 	const {name, password} = req.body
 	let createdUser = await queries.createUser(name, password)
+	// let foundUser = await queries.getSignUpUser(name, password)
 	console.log('createdUser: ', createdUser)
+	// console.log('createfoundUserdUser: ', foundUser)
 	res.json({success: true, payload: createdUser})
+	// res.json({success: true, payload: foundUser})
 })
 
 export default router

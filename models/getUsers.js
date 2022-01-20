@@ -34,11 +34,11 @@ export async function getUserByID(id) {
 	}
 }
 //create function to get users by name
-export async function getUserByName(name) {
+export async function getSignUpUser(name, password) {
 	try {
 		const data = await query(
-			`SELECT * FROM users WHERE name ILIKE '%' || $1 || '%'`,
-			[name]
+			`SELECT * FROM users WHERE name = $1 AND password = $2;`,
+			[name, password]
 		)
 		return data.rows
 	} catch (error) {
