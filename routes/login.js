@@ -23,7 +23,7 @@ router.get('/', async function (req, res, next) {
 router.post('/', async function (req, res, next) {
 	const {name, password} = req.body
 	let foundUser = await queries.getSignUpUser(name, password)
-	console.log('createfoundUserdUser: ', foundUser)
+	console.log('foundUser: ', foundUser)
 
 	res.json({success: true, payload: foundUser})
 })

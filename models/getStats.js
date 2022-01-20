@@ -10,6 +10,17 @@ export async function getAllStats() {
 		console.log(error.message)
 	}
 }
+export async function getStatsByUserPassword(password) {
+	try {
+		const data = await query(
+			`SELECT * FROM progress JOIN users ON users.uid = progress.link_id WHERE password = $1;`,
+			[password]
+		)
+		return data.rows
+	} catch (error) {
+		console.log(error.message)
+	}
+}
 export async function getStatsByWeek(week) {
 	try {
 		const data = await query(`SELECT week FROM progress;`)

@@ -8,8 +8,15 @@ const router = express.Router()
 //create routes for the api
 
 router.get('/', async function (req, res, next) {
-	const data = await queries.getAllStats()
-	res.json({success: true, payload: data})
+	const {password} = req.query
+	if (password) {
+		const data = await queries.getStatsByUserPassword(password)
+		res.json({success: true, payload: data})
+		return
+	} else {
+		const data = await queries.getAllStats()
+		res.json({success: true, payload: data})
+	}
 })
 
 //POST create stats
